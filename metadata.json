@@ -1,0 +1,21 @@
+{
+  "name": "yano3-cerebro",
+  "version": "0.1.0",
+  "author": "yano3",
+  "summary": "Module for managing and configuring Cerebro",
+  "license": "MIT",
+  "source": "https://github.com/yano3/puppet-cerebro",
+  "project_page": "https://github.com/yano3/puppet-cerebro",
+  "issues_url": "https://github.com/yano3/puppet-cerebro/issues",
+  "dependencies": [
+    {
+      "name":"puppetlabs-stdlib",
+      "version_requirement": ">= 4.0.0 < 5.0.0"
+    },
+    {
+      "name": "puppet-staging",
+      "version_requirement": ">= 2.0.0 < 3.0.0"
+    }
+  ],
+  "data_provider": null
+}
