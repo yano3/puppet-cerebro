@@ -1,0 +1,1 @@
+d /var/run/cerebro 0755 <%= @user %> <%= @group %>

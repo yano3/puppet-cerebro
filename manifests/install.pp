@@ -21,6 +21,10 @@ class cerebro::install (
     group  => $group,
   }
 
+  file { '/etc/tmpfiles.d/cerebro':
+    content => template('cerebro/etc/tmpfiles.d/cerebro'),
+  }
+
   file { '/etc/systemd/system/cerebro.service':
     content => template('cerebro/etc/systemd/system/cerebro.service'),
   } ->
