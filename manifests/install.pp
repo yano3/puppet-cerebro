@@ -27,10 +27,11 @@ class cerebro::install (
 
   file { '/etc/systemd/system/cerebro.service':
     content => template('cerebro/etc/systemd/system/cerebro.service'),
-  } ~>
+  }
 
   exec { "systemd_reload_${title}":
-    command     => '/bin/systemctl daemon-reload',
+    command     => '/usr/bin/systemctl daemon-reload',
+    subscribe   => File['/etc/systemd/system/cerebro.service'],
     refreshonly => true,
   }
 }
