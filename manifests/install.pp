@@ -15,6 +15,22 @@ class cerebro::install (
     target => "/opt/cerebro-${version}",
   }
 
+  file { '/etc/cerebro':
+    ensure => 'directory',
+    owner  => $user,
+    group  => $group,
+  } ->
+
+  file { '/etc/cerebro/application.conf':
+    content => template('cerebro/etc/cerebro/application.conf'),
+  }
+
+  file { '/var/cerebro':
+    ensure => 'directory',
+    owner  => $user,
+    group  => $group,
+  }
+
   file { '/var/run/cerebro':
     ensure => 'directory',
     owner  => $user,
