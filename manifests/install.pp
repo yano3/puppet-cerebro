@@ -13,6 +13,17 @@ class cerebro::install (
   file { '/opt/cerebro':
     ensure => 'link',
     target => "/opt/cerebro-${version}",
+  } ->
+
+  file { '/opt/cerebro/logs':
+    ensure => 'directory',
+    owner  => $user,
+    group  => $group,
+  } ->
+
+  file { '/var/log/cerebro':
+    ensure => 'link',
+    target => "/opt/cerebro/logs",
   }
 
   file { '/etc/cerebro':
