@@ -5,7 +5,7 @@ Documentation=https://github.com/lmenezes/cerebro
 [Service]
 User=<%= @user %>
 Group=<%= @group %>
-ExecStart=/opt/cerebro/bin/cerebro -Dpidfile.path=/var/run/cerebro/cerebro.pid
+ExecStart=/opt/cerebro/bin/cerebro -Dconfig.file=/etc/cerebro/application.conf
 ExecReload=/bin/kill -HUP $MAINPID
 SuccessExitStatus=143
 
