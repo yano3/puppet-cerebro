@@ -3,6 +3,7 @@ Description=Cerebro: Elasticsearch web admin tool
 Documentation=https://github.com/lmenezes/cerebro
 
 [Service]
+WorkingDirectory=/opt/cerebro
 User=<%= @user %>
 Group=<%= @group %>
 ExecStart=/opt/cerebro/bin/cerebro -Dconfig.file=/etc/cerebro/application.conf
