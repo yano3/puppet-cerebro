@@ -2,6 +2,7 @@ class cerebro (
   $version        = '0.5.1',
   $service_ensure = 'running',
   $service_enable = true,
+  $secret         = 'ki:s:[[@=Ag?QI`W2jMwkY:eqvrJ]JqoJyi2axj3ZvOv^/KavOT4ViJSv?6YY4[N',
 ) {
 
   $cerebro_user = 'cerebro'
@@ -13,6 +14,7 @@ class cerebro (
   class { 'cerebro::install':
     user    => $cerebro_user,
     version => $version,
+    secret  => $secret,
   } ~>
 
   class { 'cerebro::service':
