@@ -1,7 +1,6 @@
 class cerebro::install (
   $version,
   $user,
-  $secret,
 ) {
   $group = $user
   $package_url = "https://github.com/lmenezes/cerebro/releases/download/v${version}/cerebro-${version}.zip"
@@ -31,10 +30,6 @@ class cerebro::install (
     ensure => 'directory',
     owner  => $user,
     group  => $group,
-  } ->
-
-  file { '/etc/cerebro/application.conf':
-    content => template('cerebro/etc/cerebro/application.conf'),
   }
 
   file { '/var/cerebro':
