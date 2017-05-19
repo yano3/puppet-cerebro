@@ -1,5 +1,5 @@
 class cerebro (
-  $version        = '0.5.1',
+  $version        = '0.6.5',
   $service_ensure = 'running',
   $service_enable = true,
   $secret         = 'ki:s:[[@=Ag?QI`W2jMwkY:eqvrJ]JqoJyi2axj3ZvOv^/KavOT4ViJSv?6YY4[N',
