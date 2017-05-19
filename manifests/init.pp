@@ -14,6 +14,9 @@ class cerebro (
   class { 'cerebro::install':
     user    => $cerebro_user,
     version => $version,
+  } ->
+
+  class { 'cerebro::config':
     secret  => $secret,
   } ~>
 
