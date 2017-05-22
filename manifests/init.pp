@@ -3,6 +3,7 @@ class cerebro (
   $service_ensure = 'running',
   $service_enable = true,
   $secret         = 'ki:s:[[@=Ag?QI`W2jMwkY:eqvrJ]JqoJyi2axj3ZvOv^/KavOT4ViJSv?6YY4[N',
+  $hosts          = undef
 ) {
 
   $cerebro_user = 'cerebro'
@@ -18,6 +19,7 @@ class cerebro (
 
   class { 'cerebro::config':
     secret  => $secret,
+    hosts   => $hosts,
   } ~>
 
   class { 'cerebro::service':
