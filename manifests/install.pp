@@ -45,11 +45,11 @@ class cerebro::install (
   }
 
   file { '/etc/tmpfiles.d/cerebro.conf':
-    content => template('cerebro/etc/tmpfiles.d/cerebro.conf'),
+    content => template('cerebro/etc/tmpfiles.d/cerebro.conf.erb'),
   }
 
   file { '/etc/systemd/system/cerebro.service':
-    content => template('cerebro/etc/systemd/system/cerebro.service'),
+    content => template('cerebro/etc/systemd/system/cerebro.service.erb'),
   }
 
   exec { "systemd_reload_${title}":
