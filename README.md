@@ -3,7 +3,52 @@
 #### Table of Contents
 
 1. [Description](#description)
+1. [Setup - The basics of getting started with cerebro](#setup)
+    * [Beginning with cerebro](#beginning-with-cerebro)
+1. [Usage - Configuration options and additional functionality](#usage)
+1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+1. [Limitations - OS compatibility, etc.](#limitations)
+1. [Development - Guide for contributing to the module](#development)
 
 ## Description
 
 Puppet module for managing and configuring [Cerebro](https://github.com/lmenezes/cerebro).
+
+## Setup
+
+### Beginning with cerebro
+
+```
+class { 'cerebro': }
+```
+
+## Usage
+
+```
+class { 'cerebro':
+  version => '0.6.5',
+}
+```
+
+## Reference
+
+### Parameters
+
+#### Class: `cerebro`
+
+- `version`: Specify Cerebro version.
+- `service\_ensure`: Determines whether the cerebro service should be running.
+- `service\_enable`: Determines whether the cerebro service should be enabled when the system is booted.
+- `secret`: Specify secret string.
+- `hosts`: Specify a list of known hosts.
+- `basepath`: Specify application base path.
+
+## Limitations
+
+This module has been tested on:
+
+- CentOS 7
+
+## Development
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/yano3/puppet-cerebro.
