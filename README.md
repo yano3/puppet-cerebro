@@ -37,8 +37,8 @@ class { 'cerebro':
 #### Class: `cerebro`
 
 - `version`: Specify Cerebro version.
-- `service\_ensure`: Determines whether the cerebro service should be running.
-- `service\_enable`: Determines whether the cerebro service should be enabled when the system is booted.
+- `service_ensure`: Determines whether the cerebro service should be running.
+- `service_enable`: Determines whether the cerebro service should be enabled when the system is booted.
 - `secret`: Specify secret string.
 - `hosts`: Specify a list of known hosts.
 - `basepath`: Specify application base path.
