@@ -1,8 +1,8 @@
 # Main class
 class cerebro (
   String $version        = $cerebro::params::version,
-  String $service_ensure = $cerebro::params::service_ensure,
-  String $service_enable = $cerebro::params::service_enable,
+  $service_ensure = $cerebro::params::service_ensure,
+  $service_enable = $cerebro::params::service_enable,
   String $secret         = $cerebro::params::secret,
   Array $hosts           = $cerebro::params::hosts,
   String $basepath       = $cerebro::params::basepath,
