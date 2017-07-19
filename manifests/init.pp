@@ -1,21 +1,22 @@
+# Main class
 class cerebro (
-  $version        = '0.6.5',
-  $service_ensure = 'running',
-  $service_enable = true,
-  $secret         = 'ki:s:[[@=Ag?QI`W2jMwkY:eqvrJ]JqoJyi2axj3ZvOv^/KavOT4ViJSv?6YY4[N',
-  $hosts          = undef,
-  $basepath       = '/',
-) {
+  String $version        = $cerebro::params::version,
+  String $service_ensure = $cerebro::params::service_ensure,
+  String $service_enable = $cerebro::params::service_enable,
+  String $secret         = $cerebro::params::secret,
+  Array $hosts           = $cerebro::params::hosts,
+  String $basepath       = $cerebro::params::basepath,
+  String $user           = $cerebro::params::cerebro_user,
 
-  $cerebro_user = 'cerebro'
+) inherits cerebro::params {
 
   class { 'cerebro::user':
-    user => $cerebro_user,
+    cerebro_user  => $user,
   } ->
 
   class { 'cerebro::install':
-    user    => $cerebro_user,
-    version => $version,
+    cerebro_user => $user,
+    version      => $version,
   } ->
 
   class { 'cerebro::config':
@@ -25,7 +26,7 @@ class cerebro (
   } ~>
 
   class { 'cerebro::service':
-    enable => $service_enable,
-    ensure => $service_ensure,
+    service_enable => $service_enable,
+    service_ensure => $service_ensure,
   }
 }
