@@ -1,9 +1,10 @@
+# Create the init script
 class cerebro::service (
-  $enable,
-  $ensure,
-) {
+  $service_ensure = $cerebro::params::service_ensure,
+  $service_enable = $cerebro::params::service_enable,
+) inherits cerebro::params {
   service { 'cerebro':
-    enable => $enable,
-    ensure => $ensure,
+    ensure => $service_ensure,
+    enable => $service_enable,
   }
 }
