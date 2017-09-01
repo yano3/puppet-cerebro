@@ -64,13 +64,7 @@ class cerebro::install (
     content => template('cerebro/etc/tmpfiles.d/cerebro.conf.erb'),
   }
 
-  file { '/etc/systemd/system/cerebro.service':
+  ::systemd::unit_file { 'cerebro.service':
     content => template('cerebro/etc/systemd/system/cerebro.service.erb'),
-  }
-
-  exec { "systemd_reload_${title}":
-    command     => '/usr/bin/systemctl daemon-reload',
-    subscribe   => File['/etc/systemd/system/cerebro.service'],
-    refreshonly => true,
   }
 }

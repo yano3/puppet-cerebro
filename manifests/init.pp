@@ -23,4 +23,7 @@ class cerebro (
   -> Class['cerebro::install']
   -> Class['cerebro::config']
   ~> Class['cerebro::service']
+
+  Class['cerebro::install']
+  ~> Class['cerebro::service']
 }
