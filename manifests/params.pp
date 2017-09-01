@@ -11,4 +11,6 @@ class cerebro::params {
     'Debian' => '/usr/sbin/nologin',
     default  => '/sbin/nologin',
   }
+  $java_opts      = []
+  $java_home      = undef
 }

@@ -8,6 +8,8 @@ class cerebro (
   Stdlib::Unixpath $shell          = $::cerebro::params::shell,
   String           $cerebro_user   = $::cerebro::params::cerebro_user,
   Optional[String] $package_url    = $::cerebro::params::package_url,
+  Array            $java_opts      = $::cerebro::params::java_opts,
+  Optional[Stdlib::Unixpath] $java_home = $::cerebro::params::java_home,
 ) inherits cerebro::params {
 
   if $secret == $::cerebro::params::secret {
