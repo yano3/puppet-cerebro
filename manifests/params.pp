@@ -13,4 +13,5 @@ class cerebro::params {
   }
   $java_opts      = []
   $java_home      = undef
+  $basic_auth_settings = undef
 }

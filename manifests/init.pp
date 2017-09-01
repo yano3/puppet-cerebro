@@ -10,6 +10,8 @@ class cerebro (
   Optional[String] $package_url    = $::cerebro::params::package_url,
   Array            $java_opts      = $::cerebro::params::java_opts,
   Optional[Stdlib::Unixpath] $java_home = $::cerebro::params::java_home,
+
+  Optional[Hash] $basic_auth_settings = $::cerebro::params::basic_auth_settings,
 ) inherits cerebro::params {
 
   if $secret == $::cerebro::params::secret {
