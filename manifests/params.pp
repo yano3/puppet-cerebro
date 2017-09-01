@@ -2,7 +2,7 @@ class cerebro::params {
   $version        = '0.6.6'
   $service_ensure = 'running'
   $service_enable = true
-  $secret         = 'ki:s:[[@=Ag?QI`W2jMwkY:eqvrJ]JqoJyi2axj3ZvOv^/KavOT4ViJSv?6YY4[N' # The upstream default
+  $secret         = cache_data('cerebro_cache_data', 'cerebro_secret', random_password(32))
   $hosts          = []
   $basepath       = '/'
   $cerebro_user   = 'cerebro'

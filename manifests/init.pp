@@ -14,10 +14,6 @@ class cerebro (
   Optional[Hash] $basic_auth_settings = $::cerebro::params::basic_auth_settings,
 ) inherits cerebro::params {
 
-  if $secret == $::cerebro::params::secret {
-    notify { 'Default is being used for $::cerebro::secret.  It is highly recommended to change this value before running cerebro in production.':}
-  }
-
   contain '::cerebro::user'
   contain '::cerebro::install'
   contain '::cerebro::config'
