@@ -1,13 +1,13 @@
 class cerebro (
-  $version        = $::cerebro::params::version,
-  $service_ensure = $::cerebro::params::service_ensure,
-  $service_enable = $::cerebro::params::service_enable,
-  $secret         = $::cerebro::params::secret,
-  $hosts          = $::cerebro::params::hosts,
-  $basepath       = $::cerebro::params::basepath,
-  $cerebro_user   = $::cerebro::params::cerebro_user,
-  $package_url    = $::cerebro::params::package_url,
-  $shell          = $::cerebro::params::shell,
+  Variant[Enum['stopped','running'], Boolean] $service_ensure = $::cerebro::params::service_ensure,
+  Boolean          $service_enable = $::cerebro::params::service_enable,
+  String           $version        = $::cerebro::params::version,
+  String           $secret         = $::cerebro::params::secret,
+  Array            $hosts          = $::cerebro::params::hosts,
+  Variant[Pattern[/^\/$/],Stdlib::Unixpath] $basepath = $::cerebro::params::basepath,
+  Stdlib::Unixpath $shell          = $::cerebro::params::shell,
+  String           $cerebro_user   = $::cerebro::params::cerebro_user,
+  Optional[String] $package_url    = $::cerebro::params::package_url,
 ) inherits cerebro::params {
 
   if $secret == $::cerebro::params::secret {
