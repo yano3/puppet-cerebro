@@ -9,18 +9,20 @@ class cerebro::install (
   staging::deploy { "cerebro-${version}.zip":
     source => $real_package_url,
     target => '/opt',
-  } ->
+  }
 
   file { '/opt/cerebro':
-    ensure => 'link',
-    target => "/opt/cerebro-${version}",
-  } ->
+    ensure  => 'link',
+    target  => "/opt/cerebro-${version}",
+    require => Staging::Deploy["cerebro-${version}.zip"],
+  }
 
   file { '/opt/cerebro/logs':
-    ensure => 'directory',
-    owner  => $user,
-    group  => $group,
-  } ->
+    ensure  => 'directory',
+    owner   => $user,
+    group   => $group,
+    require => File['/opt/cerebro'],
+  }
 
   file { '/var/log/cerebro':
     ensure => 'link',
