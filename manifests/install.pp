@@ -1,12 +1,13 @@
 class cerebro::install (
-  $version,
-  $user,
+  $version     = $::cerebro::version,
+  $user        = $::cerebro::cerebro_user,
+  $package_url = $::cerebro::package_url,
 ) {
   $group = $user
-  $package_url = "https://github.com/lmenezes/cerebro/releases/download/v${version}/cerebro-${version}.zip"
+  $real_package_url = pick($package_url, "https://github.com/lmenezes/cerebro/releases/download/v${version}/cerebro-${version}.zip")
 
   staging::deploy { "cerebro-${version}.zip":
-    source => $package_url,
+    source => $real_package_url,
     target => '/opt',
   } ->
 
@@ -23,7 +24,7 @@ class cerebro::install (
 
   file { '/var/log/cerebro':
     ensure => 'link',
-    target => "/opt/cerebro/logs",
+    target => '/opt/cerebro/logs',
   }
 
   file { '/etc/cerebro':
