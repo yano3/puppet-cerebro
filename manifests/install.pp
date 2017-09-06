@@ -1,29 +1,45 @@
 class cerebro::install (
-  $version,
-  $user,
+  $version     = $::cerebro::version,
+  $user        = $::cerebro::cerebro_user,
+  $package_url = $::cerebro::package_url,
 ) {
   $group = $user
-  $package_url = "https://github.com/lmenezes/cerebro/releases/download/v${version}/cerebro-${version}.zip"
+  $real_package_url = pick($package_url, "https://github.com/lmenezes/cerebro/releases/download/v${version}/cerebro-${version}.zip")
 
-  staging::deploy { "cerebro-${version}.zip":
-    source => $package_url,
-    target => '/opt',
-  } ->
-
-  file { '/opt/cerebro':
-    ensure => 'link',
-    target => "/opt/cerebro-${version}",
-  } ->
-
-  file { '/opt/cerebro/logs':
-    ensure => 'directory',
+  file { "/opt/cerebro-${version}":
+    ensure => directory,
     owner  => $user,
     group  => $group,
-  } ->
+    mode   => '0755',
+  }
+
+  archive { "/tmp/cerebro-${version}.zip":
+    source       => $real_package_url,
+    extract      => true,
+    extract_path => '/opt',
+    creates      => "/opt/cerebro-${version}/bin",
+    cleanup      => true,
+    user         => $user,
+    group        => $group,
+    require      => File["/opt/cerebro-${version}"],
+  }
+
+  file { '/opt/cerebro':
+    ensure  => 'link',
+    target  => "/opt/cerebro-${version}",
+    require => Archive["/tmp/cerebro-${version}.zip"],
+  }
+
+  file { '/opt/cerebro/logs':
+    ensure  => 'directory',
+    owner   => $user,
+    group   => $group,
+    require => File['/opt/cerebro'],
+  }
 
   file { '/var/log/cerebro':
     ensure => 'link',
-    target => "/opt/cerebro/logs",
+    target => '/opt/cerebro/logs',
   }
 
   file { '/etc/cerebro':
@@ -48,13 +64,7 @@ class cerebro::install (
     content => template('cerebro/etc/tmpfiles.d/cerebro.conf.erb'),
   }
 
-  file { '/etc/systemd/system/cerebro.service':
+  ::systemd::unit_file { 'cerebro.service':
     content => template('cerebro/etc/systemd/system/cerebro.service.erb'),
-  }
-
-  exec { "systemd_reload_${title}":
-    command     => '/usr/bin/systemctl daemon-reload',
-    subscribe   => File['/etc/systemd/system/cerebro.service'],
-    refreshonly => true,
   }
 }

@@ -1,31 +1,29 @@
 class cerebro (
-  $version        = '0.6.5',
-  $service_ensure = 'running',
-  $service_enable = true,
-  $secret         = 'ki:s:[[@=Ag?QI`W2jMwkY:eqvrJ]JqoJyi2axj3ZvOv^/KavOT4ViJSv?6YY4[N',
-  $hosts          = undef,
-  $basepath       = '/',
-) {
+  Variant[Enum['stopped','running'], Boolean] $service_ensure = $::cerebro::params::service_ensure,
+  Boolean          $service_enable = $::cerebro::params::service_enable,
+  String           $version        = $::cerebro::params::version,
+  String           $secret         = $::cerebro::params::secret,
+  Array            $hosts          = $::cerebro::params::hosts,
+  Variant[Pattern[/^\/$/],Stdlib::Unixpath] $basepath = $::cerebro::params::basepath,
+  Stdlib::Unixpath $shell          = $::cerebro::params::shell,
+  String           $cerebro_user   = $::cerebro::params::cerebro_user,
+  Optional[String] $package_url    = $::cerebro::params::package_url,
+  Array            $java_opts      = $::cerebro::params::java_opts,
+  Optional[Stdlib::Unixpath] $java_home = $::cerebro::params::java_home,
 
-  $cerebro_user = 'cerebro'
+  Optional[Hash] $basic_auth_settings = $::cerebro::params::basic_auth_settings,
+) inherits cerebro::params {
 
-  class { 'cerebro::user':
-    user => $cerebro_user,
-  } ->
+  contain '::cerebro::user'
+  contain '::cerebro::install'
+  contain '::cerebro::config'
+  contain '::cerebro::service'
 
-  class { 'cerebro::install':
-    user    => $cerebro_user,
-    version => $version,
-  } ->
+  Class['cerebro::user']
+  -> Class['cerebro::install']
+  -> Class['cerebro::config']
+  ~> Class['cerebro::service']
 
-  class { 'cerebro::config':
-    secret   => $secret,
-    hosts    => $hosts,
-    basepath => $basepath,
-  } ~>
-
-  class { 'cerebro::service':
-    enable => $service_enable,
-    ensure => $service_ensure,
-  }
+  Class['cerebro::install']
+  ~> Class['cerebro::service']
 }

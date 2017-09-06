@@ -1,0 +1,8 @@
+# This file is managed by puppet
+<% if @java_home -%>
+JAVA_HOME=<%= @java_home %>
+<% end -%>
+<% unless @java_opts.empty? -%>
+<% java_opts = @java_opts.sort.join(' ') -%>
+JAVA_OPTS=<%= java_opts %>
+<% end -%>

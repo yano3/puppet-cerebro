@@ -1,9 +1,9 @@
 class cerebro::service (
-  $enable,
-  $ensure,
+  $ensure = $::cerebro::service_ensure,
+  $enable = $::cerebro::service_enable,
 ) {
   service { 'cerebro':
-    enable => $enable,
     ensure => $ensure,
+    enable => $enable,
   }
 }
