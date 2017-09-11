@@ -26,7 +26,7 @@ class { 'cerebro': }
 
 ```
 class { 'cerebro':
-  version => '0.6.5',
+  version => '0.6.6',
 }
 ```
 
@@ -42,6 +42,12 @@ class { 'cerebro':
 - `secret`: Specify secret string.
 - `hosts`: Specify a list of known hosts.
 - `basepath`: Specify application base path.
+- `shell`: Specify a shell for cerebro user.
+- `cerebro_user`: Specify the user that cerebro process is executed as.
+- `package_url`: Specify a package location.
+- `java_opts`: Specify `JAVA_OPTS` variables.
+- `java_home`: Specify `JAVA_HOME` path.
+- `basic_auth_settings`: Specify basic authentication settings.
 
 ## Limitations
 
