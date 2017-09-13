@@ -1,4 +1,4 @@
-# Cerebro Puppet Module
+# Cerebro Puppet Module [![Puppet Forge](https://img.shields.io/puppetforge/v/yano3/cerebro.svg?style=flat-square)](https://forge.puppet.com/yano3/cerebro)
 
 #### Table of Contents
 
