@@ -1,5 +1,5 @@
 class cerebro::params {
-  $version        = '0.6.6'
+  $version        = '0.6.8'
   $service_ensure = 'running'
   $service_enable = true
   $secret         = cache_data('cerebro_cache_data', 'cerebro_secret', random_password(32))
