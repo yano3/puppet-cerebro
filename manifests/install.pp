@@ -4,7 +4,7 @@ class cerebro::install (
   $package_url = $::cerebro::package_url,
 ) {
   $group = $user
-  $real_package_url = pick($package_url, "https://github.com/lmenezes/cerebro/releases/download/v${version}/cerebro-${version}.zip")
+  $real_package_url = pick($package_url, "https://github.com/lmenezes/cerebro/releases/download/v${version}/cerebro-${version}.tgz")
 
   file { "/opt/cerebro-${version}":
     ensure => directory,
@@ -13,7 +13,7 @@ class cerebro::install (
     mode   => '0755',
   }
 
-  archive { "/tmp/cerebro-${version}.zip":
+  archive { "/tmp/cerebro-${version}.tgz":
     source       => $real_package_url,
     extract      => true,
     extract_path => '/opt',
@@ -27,7 +27,7 @@ class cerebro::install (
   file { '/opt/cerebro':
     ensure  => 'link',
     target  => "/opt/cerebro-${version}",
-    require => Archive["/tmp/cerebro-${version}.zip"],
+    require => Archive["/tmp/cerebro-${version}.tgz"],
   }
 
   file { '/opt/cerebro/logs':
