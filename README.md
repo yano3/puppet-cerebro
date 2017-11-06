@@ -43,6 +43,7 @@ class { 'cerebro':
 - `hosts`: Specify a list of known hosts.
 - `basepath`: Specify application base path.
 - `shell`: Specify a shell for cerebro user.
+- `manage_user`: Specify whether creating user that cerebro process is executed as.
 - `cerebro_user`: Specify the user that cerebro process is executed as.
 - `package_url`: Specify a package location.
 - `java_opts`: Specify `JAVA_OPTS` variables.
