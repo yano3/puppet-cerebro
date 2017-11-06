@@ -2,6 +2,7 @@ class cerebro::install (
   $version     = $::cerebro::version,
   $user        = $::cerebro::cerebro_user,
   $package_url = $::cerebro::package_url,
+  $sysconfig   = $::cerebro::sysconfig,
 ) {
   $group = $user
   $real_package_url = pick($package_url, "https://github.com/lmenezes/cerebro/releases/download/v${version}/cerebro-${version}.tgz")

@@ -7,7 +7,7 @@ WorkingDirectory=/opt/cerebro
 User=<%= @user %>
 Group=<%= @group %>
 PIDFile=/var/run/cerebro/cerebro.pid
-EnvironmentFile=-/etc/sysconfig/cerebro
+EnvironmentFile=-<%= @sysconfig %>
 ExecStart=/opt/cerebro/bin/cerebro -Dconfig.file=/etc/cerebro/application.conf
 ExecReload=/bin/kill -HUP $MAINPID
 SuccessExitStatus=143
