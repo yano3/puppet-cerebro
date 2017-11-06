@@ -6,6 +6,7 @@ class cerebro::params {
   $hosts          = []
   $basepath       = '/'
   $cerebro_user   = 'cerebro'
+  $manage_user    = true
   $package_url    = undef
   $shell = $::osfamily ? {
     'Debian' => '/usr/sbin/nologin',
