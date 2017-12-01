@@ -53,6 +53,18 @@
       "operatingsystemrelease": [
         "7"
       ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "16.04"
+      ]
     }
   ],
   "requirements": [
