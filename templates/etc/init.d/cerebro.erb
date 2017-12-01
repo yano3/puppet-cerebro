@@ -1,0 +1,94 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          <NAME>
+# Required-Start:    $local_fs $network $named $time $syslog
+# Required-Stop:     $local_fs $network $named $time $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       <DESCRIPTION>
+### END INIT INFO
+
+NAME=cerebro
+SCRIPT="/opt/cerebro/bin/cerebro -Dconfig.file=/etc/cerebro/application.conf"
+RUNAS=root
+
+# creating
+DAEMON=/opt/cerebro/bin/cerebro
+
+PIDFILE=/var/run/cerebro/cerebro2.pid
+PIDAPPFILE=/var/run/cerebro/cerebro.pid
+LOGFILE=/var/log/cerebro/sysv_application.log
+
+start() {
+  if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
+    echo 'Service already running' >&2
+    return 1
+  fi
+  echo 'Starting service…' >&2
+  local CMD="$SCRIPT &> \"$LOGFILE\" & echo \$!"
+  su -c "$CMD" $RUNAS > "$PIDFILE"
+  echo 'Service started' >&2
+}
+
+stop() {
+  /bin/sleep 2
+  if [ ! -f "$PIDFILE" ] || ! kill -0 $(cat "$PIDFILE"); then
+    echo 'Service not running' >&2
+    return 1
+  fi
+  /bin/sleep 2
+  if [ ! -f "$PIDAPPFILE" ] || ! kill -0 $(cat "$PIDAPPFILE"); then
+    echo 'Service not running' >&2
+    return 1
+  fi
+  echo 'Stopping service…' >&2
+  kill -15 $(cat "$PIDFILE") && rm -f "$PIDFILE" >&2
+  kill -15 $(cat "$PIDAPPFILE") && rm -f "$PIDAPPFILE" >&2
+  echo 'Service stopped' >&2
+}
+
+rh_status() {
+  if [ ! -f "$PIDFILE" ] || [ ! -f "$PIDAPPFILE" ]; then
+    echo 'Service is not running' >&2
+    return 1
+  else 
+    echo 'Service is running'
+    return 0
+  fi
+}
+
+uninstall() {
+  echo -n "Are you really sure you want to uninstall this service? That cannot be undone. [yes|No] "
+  local SURE
+  read SURE
+  if [ "$SURE" = "yes" ]; then
+    stop
+    rm -f "$PIDFILE"
+    echo "Notice: log file is not be removed: '$LOGFILE'" >&2
+    update-rc.d -f <NAME> remove
+    rm -fv "$0"
+  fi
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  uninstall)
+    uninstall
+    ;;
+  status)
+    rh_status
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|uninstall}"
+esac
+
+
