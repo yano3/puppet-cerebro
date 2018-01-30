@@ -1,7 +1,7 @@
 <% if !@address.nil? -%>
   <%- bind_address = "-Dhttp.address=#{@address}" -%>
 <% else -%>
-  <%- bind_address = undef -%>
+  <%- bind_address = nil -%>
 <% end -%>
 [Unit]
 Description=Cerebro: Elasticsearch web admin tool
