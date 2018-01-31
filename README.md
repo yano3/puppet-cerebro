@@ -49,6 +49,7 @@ class { 'cerebro':
 - `java_opts`: Specify `JAVA_OPTS` variables.
 - `java_home`: Specify `JAVA_HOME` path.
 - `basic_auth_settings`: Specify basic authentication settings.
+- `address`: Specify IP address cerebro listeining on.
 
 ## Limitations
 
