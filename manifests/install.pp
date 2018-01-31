@@ -1,5 +1,6 @@
 class cerebro::install (
   $version     = $::cerebro::version,
+  $address     = $::cerebro::address,
   $user        = $::cerebro::cerebro_user,
   $package_url = $::cerebro::package_url,
   $sysconfig   = $::cerebro::sysconfig,

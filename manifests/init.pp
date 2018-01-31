@@ -12,6 +12,7 @@ class cerebro (
   $java_opts           = $::cerebro::params::java_opts,
   $java_home           = $::cerebro::params::java_home,
   $basic_auth_settings = $::cerebro::params::basic_auth_settings,
+  $address             = $::cerebro::params::address,
 ) inherits cerebro::params {
 
   if $manage_user {
