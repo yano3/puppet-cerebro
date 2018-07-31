@@ -6,6 +6,7 @@ class cerebro::config (
   $java_opts           = $::cerebro::java_opts,
   $basic_auth_settings = $::cerebro::basic_auth_settings,
   $sysconfig           = $::cerebro::sysconfig,
+  $extraconfig         = $::cerebro::extraconfig,
 ) {
   file { '/etc/cerebro/application.conf':
     ensure  => file,

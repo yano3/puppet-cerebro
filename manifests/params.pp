@@ -20,4 +20,5 @@ class cerebro::params {
     'Debian' => '/etc/default/cerebro',
     default  => '/etc/sysconfig/cerebro',
   }
+  $extraconfig    = undef
 }
