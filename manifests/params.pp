@@ -9,7 +9,7 @@ class cerebro::params {
   $cerebro_user   = 'cerebro'
   $manage_user    = true
   $package_url    = undef
-  $shell = $::osfamily ? {
+  $shell = $facts['os']['family'] ? {
     'Debian' => '/usr/sbin/nologin',
     default  => '/sbin/nologin',
   }
