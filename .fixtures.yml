@@ -1,0 +1,6 @@
+fixtures:
+  repositories:
+    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib"
+    extlib: "https://github.com/voxpupuli/puppet-extlib"
+    archive: "https://github.com/voxpupuli/puppet-archive"
+    systemd: "https://github.com/camptocamp/puppet-systemd"

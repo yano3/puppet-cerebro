@@ -1,3 +1,6 @@
+# @summary Sets defaults
+#
+# @api private
 class cerebro::params {
   $version        = '0.8.1'
   $address        = undef
@@ -16,7 +19,7 @@ class cerebro::params {
   $java_opts      = []
   $java_home      = undef
   $basic_auth_settings = undef
-  $sysconfig = $::osfamily ? {
+  $sysconfig = $facts['os']['family'] ? {
     'Debian' => '/etc/default/cerebro',
     default  => '/etc/sysconfig/cerebro',
   }

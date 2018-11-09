@@ -1,11 +1,12 @@
-class cerebro::service (
-  $ensure = $::cerebro::service_ensure,
-  $enable = $::cerebro::service_enable,
-) {
-  if ($::operatingsystem == 'Amazon') {
+# @summary Manages Cerebro service
+#
+# @api private
+class cerebro::service
+{
+  if $facts['os']['name'] == 'Amazon' {
     service { 'cerebro':
-      ensure  => $ensure,
-      enable  => $enable,
+      ensure  => $cerebro::service_ensure,
+      enable  => $cerebro::service_enable,
       restart => '/etc/init.d/cerebro restart',
       start   => '/etc/init.d/cerebro start',
       status  => '/etc/init.d/cerebro status',
@@ -13,8 +14,8 @@ class cerebro::service (
     }
   } else {
     service { 'cerebro':
-      ensure => $ensure,
-      enable => $enable,
+      ensure => $cerebro::service_ensure,
+      enable => $cerebro::service_enable,
     }
   }
 }
