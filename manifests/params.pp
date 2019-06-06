@@ -1,5 +1,5 @@
 class cerebro::params {
-  $version        = '0.8.1'
+  $version        = '0.8.3'
   $address        = undef
   $service_ensure = 'running'
   $service_enable = true
