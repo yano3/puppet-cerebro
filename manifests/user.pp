@@ -1,9 +1,12 @@
-class cerebro::user (
-  $user  = $::cerebro::cerebro_user,
-  $shell = $::cerebro::shell,
-) {
-  user { $user:
-    home  => '/opt/cerebro',
-    shell => $shell,
+# @summary Creates the cerebro user
+#
+# @api private
+class cerebro::user
+{
+  if $cerebro::manage_user {
+    user { $cerebro::cerebro_user:
+      home  => '/opt/cerebro',
+      shell => $cerebro::shell,
+    }
   }
 }

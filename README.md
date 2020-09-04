@@ -1,4 +1,6 @@
-# Cerebro Puppet Module [![Puppet Forge](https://img.shields.io/puppetforge/v/encore/cerebro.svg?style=flat-square)](https://forge.puppet.com/EncoreTechnologies/cerebro)
+# Cerebro Puppet Module
+[![Puppet Forge](https://img.shields.io/puppetforge/v/encore/cerebro.svg?style=flat-square)](https://forge.puppet.com/encore/cerebro)
+[![License](https://img.shields.io/github/license/EncoreTechnologies/puppet-cerebron.svg)](https://github.com/EncoreTechnologies/puppet-cerebro/blob/master/LICENSE)
 
 #### Table of Contents
 
@@ -18,38 +20,22 @@ Puppet module for managing and configuring [Cerebro](https://github.com/lmenezes
 
 ### Beginning with cerebro
 
-```
-class { 'cerebro': }
+```puppet
+include cerebro
 ```
 
 ## Usage
 
-```
+```puppet
 class { 'cerebro':
-  version => '0.8.3',
+  version => '0.8.1',
 }
 ```
 
 ## Reference
 
-### Parameters
-
-#### Class: `cerebro`
-
-- `version`: Specify Cerebro version.
-- `service_ensure`: Determines whether the cerebro service should be running.
-- `service_enable`: Determines whether the cerebro service should be enabled when the system is booted.
-- `secret`: Specify secret string.
-- `hosts`: Specify a list of known hosts.
-- `basepath`: Specify application base path.
-- `shell`: Specify a shell for cerebro user.
-- `manage_user`: Specify whether creating user that cerebro process is executed as.
-- `cerebro_user`: Specify the user that cerebro process is executed as.
-- `package_url`: Specify a package location.
-- `java_opts`: Specify `JAVA_OPTS` variables.
-- `java_home`: Specify `JAVA_HOME` path.
-- `basic_auth_settings`: Specify basic authentication settings.
-- `address`: Specify IP address cerebro listeining on.
+See [REFERENCE.md](REFERENCE.md).
+This module has been documented with [puppet-strings](https://github.com/puppetlabs/puppet-strings).
 
 ## Limitations
 
@@ -60,3 +46,8 @@ This module has been tested on:
 ## Development
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/EncoreTechnologies/puppet-cerebro.
+
+To regenerate the [REFERENCE.MD](REFERENCE.md) file, please run the rake task as follows.
+```console
+ % bundle exec rake strings:generate\[',,,,false,true']
+```

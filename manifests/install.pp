@@ -1,10 +1,14 @@
-class cerebro::install (
-  $version     = $::cerebro::version,
-  $address     = $::cerebro::address,
-  $user        = $::cerebro::cerebro_user,
-  $package_url = $::cerebro::package_url,
-  $sysconfig   = $::cerebro::sysconfig,
-) {
+# @summary Installs Cerebro
+#
+# @api private
+class cerebro::install
+{
+  $version     = $cerebro::version
+  $address     = $cerebro::address
+  $user        = $cerebro::cerebro_user
+  $package_url = $cerebro::package_url
+  $sysconfig   = $cerebro::sysconfig
+
   $group = $user
   $real_package_url = pick($package_url, "https://github.com/lmenezes/cerebro/releases/download/v${version}/cerebro-${version}.tgz")
 
@@ -27,53 +31,34 @@ class cerebro::install (
   }
 
   file { '/opt/cerebro':
-    ensure  => 'link',
+    ensure  => link,
     target  => "/opt/cerebro-${version}",
     require => Archive["/tmp/cerebro-${version}.tgz"],
   }
 
-  file { '/opt/cerebro/logs':
-    ensure  => 'directory',
-    owner   => $user,
-    group   => $group,
-    require => File['/opt/cerebro'],
+  file { ['/opt/cerebro/logs','/etc/cerebro','/var/cerebro','/var/run/cerebro']:
+    ensure => directory,
+    owner  => $user,
+    group  => $group,
   }
 
   file { '/var/log/cerebro':
-    ensure => 'link',
+    ensure => link,
     target => '/opt/cerebro/logs',
   }
 
-  file { '/etc/cerebro':
-    ensure => 'directory',
-    owner  => $user,
-    group  => $group,
-  }
-
-  file { '/var/cerebro':
-    ensure => 'directory',
-    owner  => $user,
-    group  => $group,
-  }
-
-  file { '/var/run/cerebro':
-    ensure => 'directory',
-    owner  => $user,
-    group  => $group,
-  }
-
   file { '/etc/tmpfiles.d/cerebro.conf':
+    ensure  => file,
     content => template('cerebro/etc/tmpfiles.d/cerebro.conf.erb'),
   }
 
-
-  if ($::operatingsystem == 'Amazon') {
+  if $facts['os']['name'] == 'Amazon' {
     file { '/etc/init.d/cerebro':
       content => template('cerebro/etc/init.d/cerebro.erb'),
       mode    => '0744',
     }
   } else {
-    ::systemd::unit_file { 'cerebro.service':
+    systemd::unit_file { 'cerebro.service':
       content => template('cerebro/etc/systemd/system/cerebro.service.erb'),
     }
   }
