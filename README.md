@@ -1,4 +1,4 @@
-# Cerebro Puppet Module [![Puppet Forge](https://img.shields.io/puppetforge/v/yano3/cerebro.svg?style=flat-square)](https://forge.puppet.com/yano3/cerebro)
+# Cerebro Puppet Module [![Puppet Forge](https://img.shields.io/puppetforge/v/encore/cerebro.svg?style=flat-square)](https://forge.puppet.com/EncoreTechnologies/cerebro)
 
 #### Table of Contents
 
@@ -59,4 +59,4 @@ This module has been tested on:
 
 ## Development
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/yano3/puppet-cerebro.
+Bug reports and pull requests are welcome on GitHub at https://github.com/EncoreTechnologies/puppet-cerebro.
