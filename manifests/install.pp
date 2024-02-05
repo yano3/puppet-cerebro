@@ -66,7 +66,6 @@ class cerebro::install (
     content => template('cerebro/etc/tmpfiles.d/cerebro.conf.erb'),
   }
 
-
   if ($facts['os']['name'] == 'Amazon') {
     file { '/etc/init.d/cerebro':
       content => template('cerebro/etc/init.d/cerebro.erb'),
